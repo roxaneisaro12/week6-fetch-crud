@@ -104,8 +104,21 @@ export function setupPostForm() {
       userId: 1,
     };
 
-    if (!newPost.title || !newPost.body) {
-      formStatus.textContent = "Please complete both fields.";
+    if (newPost.title.length < 3) {
+      formStatus.textContent =
+        "Title must contain at least 3 characters.";
+      return;
+    }
+
+    if (newPost.body.length < 10) {
+      formStatus.textContent =
+        "Post content must contain at least 10 characters.";
+      return;
+    }
+
+    if (newPost.title.length > 100 || newPost.body.length > 1000) {
+      formStatus.textContent =
+        "Your title or content exceeds the allowed length.";
       return;
     }
 
@@ -158,7 +171,8 @@ async function editPost(post) {
     );
 
     renderPosts();
-    postsStatus.textContent = `Showing ${posts.length} posts. Post updated successfully!`;
+    postsStatus.textContent =
+      `Showing ${posts.length} posts. Post updated successfully!`;
   } catch (error) {
     postsStatus.textContent = `Could not update post: ${error.message}`;
   }

@@ -14,7 +14,7 @@ document.querySelector("#app").innerHTML = `
       </a>
 
       <span class="text-sm text-slate-500">
-        Week 6 · Fetch API
+        Week 6 - Fetch API
       </span>
     </nav>
   </header>
@@ -57,9 +57,14 @@ document.querySelector("#app").innerHTML = `
               name="title"
               type="text"
               placeholder="Enter your post title"
+              minlength="3"
+              maxlength="100"
               required
               class="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
+            <p class="text-xs text-slate-400 mt-1">
+              Minimum 3 characters, maximum 100.
+            </p>
           </div>
 
           <div>
@@ -72,9 +77,14 @@ document.querySelector("#app").innerHTML = `
               name="body"
               rows="4"
               placeholder="Write something interesting..."
+              minlength="10"
+              maxlength="1000"
               required
               class="w-full border border-slate-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             ></textarea>
+            <p class="text-xs text-slate-400 mt-1">
+              Minimum 10 characters, maximum 1000.
+            </p>
           </div>
 
           <div class="flex justify-between items-center gap-4">
@@ -156,12 +166,10 @@ document.querySelector("#app").innerHTML = `
   </main>
 
   <footer class="text-center py-8 text-sm text-slate-500">
-    Week 6 · HTTP, APIs & Node.js · Fetch API Practice
+    Week 6 - HTTP, APIs and Node.js - Fetch API Practice
   </footer>
 `;
 
 loadPosts();
 setupPostFilters();
 setupPostForm();
-
-
