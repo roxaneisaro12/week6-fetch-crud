@@ -137,7 +137,7 @@ document.querySelector("#app").innerHTML = `
           </p>
         </div>
 
-        <div class="flex items-center gap-3">
+        <div class="flex flex-wrap items-center gap-3">
           <label for="user-filter" class="text-sm font-medium text-slate-600">
             Filter by user:
           </label>
@@ -151,6 +151,14 @@ document.querySelector("#app").innerHTML = `
               `<option value="${i + 1}">User ${i + 1}</option>`
             ).join("")}
           </select>
+
+          <button
+            id="refresh-posts"
+            type="button"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium disabled:opacity-50"
+          >
+            Refresh posts
+          </button>
         </div>
 
       </div>
@@ -173,3 +181,19 @@ document.querySelector("#app").innerHTML = `
 loadPosts();
 setupPostFilters();
 setupPostForm();
+
+const refreshButton = document.querySelector("#refresh-posts");
+
+refreshButton.addEventListener("click", async () => {
+  const selectedUser = document.querySelector("#user-filter").value;
+
+  refreshButton.disabled = true;
+  refreshButton.textContent = "Refreshing...";
+
+  try {
+    await loadPosts(selectedUser === "all" ? null : selectedUser);
+  } finally {
+    refreshButton.disabled = false;
+    refreshButton.textContent = "Refresh posts";
+  }
+});
