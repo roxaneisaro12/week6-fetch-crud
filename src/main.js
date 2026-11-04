@@ -1,5 +1,10 @@
 
 import "./style.css";
+import {
+  loadPosts,
+  setupPostFilters,
+  setupPostForm,
+} from "./posts.js";
 
 document.querySelector("#app").innerHTML = `
   <header class="bg-white border-b border-slate-200">
@@ -154,3 +159,9 @@ document.querySelector("#app").innerHTML = `
     Week 6 · HTTP, APIs & Node.js · Fetch API Practice
   </footer>
 `;
+
+loadPosts();
+setupPostFilters();
+setupPostForm();
+
+
