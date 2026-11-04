@@ -76,7 +76,23 @@ export async function loadPosts(userId = null) {
     renderPosts();
     postsStatus.textContent = `Showing ${posts.length} posts`;
   } catch (error) {
-    postsStatus.textContent = `Could not load posts: ${error.message}`;
+    postsStatus.replaceChildren();
+
+    const errorMessage = document.createElement("p");
+    errorMessage.className = "text-red-600 mb-3";
+    errorMessage.textContent =
+      `Could not load posts: ${error.message}`;
+
+    const retryButton = document.createElement("button");
+    retryButton.textContent = "Try again";
+    retryButton.className =
+      "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium";
+
+    retryButton.addEventListener("click", () => {
+      loadPosts(userId);
+    });
+
+    postsStatus.append(errorMessage, retryButton);
   }
 }
 
