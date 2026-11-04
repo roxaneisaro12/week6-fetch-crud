@@ -3,7 +3,33 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  min-width: 320px;
+  min-height: 100vh;
   background-color: #f8fafc;
-  color: #1e293b;
+  color: #0f172a;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+textarea {
+  resize: vertical;
+}
+
+::selection {
+  background-color: #c7d2fe;
+  color: #312e81;
 }
