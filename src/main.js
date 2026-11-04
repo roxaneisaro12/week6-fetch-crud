@@ -1,4 +1,3 @@
-
 import "./style.css";
 import {
   loadPosts,
@@ -99,26 +98,6 @@ document.querySelector("#app").innerHTML = `
           </div>
 
         </form>
-      </div>
-
-      <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-6">
-        <p class="text-sm font-medium text-indigo-700 mb-2">
-          API information
-        </p>
-
-        <h2 class="text-2xl font-bold text-slate-900 mb-3">
-          JSONPlaceholder
-        </h2>
-
-        <p class="text-sm text-slate-600 leading-6 mb-4">
-          This application uses a practice REST API to demonstrate HTTP
-          methods and CRUD operations.
-        </p>
-
-        <div class="border-t border-indigo-200 pt-4">
-          <p class="text-xs text-slate-500 mb-1">Request timeout</p>
-          <p class="font-semibold text-slate-800">8 seconds</p>
-        </div>
       </div>
 
     </section>
