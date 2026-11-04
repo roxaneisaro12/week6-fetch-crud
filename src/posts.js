@@ -26,10 +26,21 @@ function renderPosts() {
     title.textContent = post.title;
 
     const body = document.createElement("p");
-    body.className = "text-sm text-slate-600 leading-6";
+    body.className = "text-sm text-slate-600 leading-6 mb-5";
     body.textContent = post.body;
 
-    card.append(user, title, body);
+    // Delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.textContent = "Delete post";
+    deleteButton.className =
+      "text-sm font-medium text-red-600 border border-red-200 px-4 py-2 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50";
+
+    deleteButton.addEventListener("click", () => {
+      deletePost(post.id, deleteButton);
+    });
+
+    card.append(user, title, body, deleteButton);
     postsList.appendChild(card);
   });
 }
@@ -84,6 +95,7 @@ export function setupPostFilters() {
   });
 }
 
+// Create a new post
 export function setupPostForm() {
   const form = document.querySelector("#post-form");
   const formStatus = document.querySelector("#form-status");
@@ -125,4 +137,38 @@ export function setupPostForm() {
       submitButton.disabled = false;
     }
   });
+}
+
+// Delete a post
+async function deletePost(postId, button) {
+  const postsStatus = document.querySelector("#posts-status");
+
+  const confirmed = window.confirm(
+    "Are you sure you want to delete this post?"
+  );
+
+  if (!confirmed) return;
+
+  button.disabled = true;
+  button.textContent = "Deleting...";
+
+  try {
+    await api.del(`/posts/${postId}`);
+
+    posts = posts.filter((post) => post.id !== postId);
+
+    renderPosts();
+
+    postsStatus.textContent =
+      posts.length === 0
+        ? "No posts found."
+        : `Showing ${posts.length} posts`;
+
+  } catch (error) {
+    button.disabled = false;
+    button.textContent = "Delete post";
+
+    postsStatus.textContent =
+      `Could not delete post: ${error.message}`;
+  }
 }
